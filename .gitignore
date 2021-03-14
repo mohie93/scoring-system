@@ -100,5 +100,11 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+# IntelJ
+.idea/
+
+# GCPCREDS
+gcpCreds.json
+
 # TernJS port file
 .tern-port
