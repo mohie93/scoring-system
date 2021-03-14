@@ -22,14 +22,14 @@ mongoDB.connect();
 // })();
 
 // routes
-app.use("/", async (req, res) => {
+app.use("/healthcheck", async (req, res) => {
   const version = require("./package.json").version;
   res.status(200).json({ message: "Ok", version });
 });
 
-app.use("/riders", require("./src/routes/rider.routes"));
+app.use("/api/v1/riders", require("./src/routes/rider.routes"));
 
-app.use("/criteria", require("./src/routes/criterion.routes"));
+app.use("/api/v1/criteria", require("./src/routes/criterion.routes"));
 
 // server listener
 app.listen(port, () => console.log(`Server is running on port: ${port}`));
