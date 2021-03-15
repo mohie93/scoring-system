@@ -1,4 +1,5 @@
 "use strict";
+
 require("dotenv").config({});
 
 const { PubSub } = require("@google-cloud/pubsub");

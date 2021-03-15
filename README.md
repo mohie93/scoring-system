@@ -14,8 +14,8 @@
 - Create `gcpCreds.json` that includes your GCP creds
 - Create `.env`, refer to `.env.sample`
 - Run command `npm install` to install project dependencies
-- Run command `npm create-topic` to create topic
-- Run command `npm development` to run the app locally
+- Run command `npm run create-topic` to create topic
+- Run command `npm run development` to run the app locally
 
 ## Contribution:
 

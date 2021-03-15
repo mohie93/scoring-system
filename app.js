@@ -17,9 +17,9 @@ app.use(express.json());
 mongoDB.connect();
 
 // subscribe to pub/sub
-// (async () => {
-//   await subscribeTopicService.call();
-// })();
+(async () => {
+  await subscribeTopicService.call();
+})();
 
 // routes
 app.use("/healthcheck", async (req, res) => {

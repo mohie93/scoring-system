@@ -1,11 +1,23 @@
 const Criterion = require("../models/criterion.model");
+const {
+  updateScoresRecord,
+  deleteMetricFromAllRecords,
+} = require("../services/migration.service");
 
 exports.addCriterion = async (req, res) => {
   try {
     const { name, description, defaultValue } = req.body;
     const criteria = new Criterion({ name, description, defaultValue });
     await criteria.save();
-    return { code: 201, data: { message: "Created!", data: criteria } };
+    const { success, message } = await updateScoresRecord({
+      name,
+      defaultValue,
+    });
+    if (success)
+      return { code: 201, data: { message: "Created!", data: criteria } };
+    else {
+      return { code: 422, data: { message, data: {} } };
+    }
   } catch (error) {
     return { code: 442, data: { error: error.message } };
   }
@@ -29,8 +41,15 @@ exports.updateCriterion = async (req, res) => {
 exports.deleteCriterion = async (req, res) => {
   try {
     const { id } = req.body;
-    await Criterion.findOneAndDelete(id);
-    return { code: 204, data: { message: "Deleted!" } };
+    const criterion = await Criterion.findById(id);
+    const { name } = criterion;
+    const { success, message } = await deleteMetricFromAllRecords({ name });
+    if (success) {
+      await criterion.deleteOne();
+      return { code: 204, data: { message: "Deleted!" } };
+    } else {
+      return { code: 422, data: { message, data: {} } };
+    }
   } catch (error) {
     return { code: 442, data: { error: error.message } };
   }

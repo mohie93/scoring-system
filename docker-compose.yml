@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  reminders:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3002:3002"
+    command: bash -c "node create-topic && node app.js"

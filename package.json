@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "development": "nodemon app.js",
-    "production": "node app.js"
+    "production": "node app.js",
+    "create-topic": "node ./src/services/createTopic.service.js"
   },
   "repository": {
     "type": "git",
